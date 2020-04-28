@@ -8,10 +8,10 @@ $(document).ready(function() {
 	currentVideo = null;
 	listedVideos = null;
 
-	// 获取当前 cookie 信息
 	session = getCookie('session');
 	uname = getCookie('username');
 
+	// Test -1
 
 	initPage(function() {
 		if (listedVideos !== null) {
@@ -118,7 +118,7 @@ $(document).ready(function() {
 
 
 	$("#uploadform").on('submit', function(e) {
-		e.preventDefault();
+		e.preventDefault()
 	  	var vname = $('#vname').val();
 
 	  	createVideo(vname, function(res, err) {
@@ -183,13 +183,12 @@ $(document).ready(function() {
 });
 
 function initPage(callback) {
-	// 先获取当前用户 getUserId
 	getUserId(function(res, err) {
-		//	当前没有用户 cookie 处于当前登录注册界面
 		if (err != null) {
 			window.alert("Encountered error when loading user id");
 			return;
 		}
+		// Test - 2
 		var obj = JSON.parse(res);
 		uid = obj['id'];
 		//window.alert(obj['id']);
@@ -234,8 +233,10 @@ function getCookie(cname) {
 
 // DOM operations
 function selectVideo(vid) {
-	// 
+
 	var url = 'http://' + window.location.hostname + ':9000/videos/'+ vid
+	// TODO 8080->9000
+	window.alert(url)
   	var video = $("#curr-video");
   	$("#curr-video:first-child").attr('src', url);
   	$("#curr-video-name").text(currentVideo['name']);
@@ -455,6 +456,8 @@ function getUserId(callback) {
 		'url': 'http://' + window.location.hostname + ':8000/user/' + uname,
 		'method': 'GET'
 	};
+	// Test - 3
+	//window.alert(dat["url"]);
 	$.ajax({
 		url: 'http://' + window.location.hostname + ':8080/api',
 		type: 'post',
@@ -526,6 +529,8 @@ function listAllVideos(callback) {
     'method': 'GET',
     'req_body': ''
   };
+  //TODO
+  window.alert(dat["url"]);
   $.ajax({
     url  : 'http://' + window.location.hostname + ':8080/api',
     type : 'post',
